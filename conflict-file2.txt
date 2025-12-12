@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 main: changed this line
+=======
+feature/assign-B: changed this same line
+>>>>>>> feature/assign-B
