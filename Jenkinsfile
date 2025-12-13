@@ -2,79 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Code already checked out by Jenkins'
-            }
-        }
-
-stage('Verify Files') {
-    steps {
-        sh '''
-          echo "Checking README standardization..."
-          if [ -f readme.md ] && [ -f README.md ]; then
-            echo "ERROR: Both readme.md and README.md exist"
-            exit 1
-          fi
-          echo "README naming is clean"
-        '''
-    }
-}
-
-
-        stage('Git History') {
-            steps {
-                sh '''
-                  echo "Recent commits:"
-                  git log --oneline -3
-                '''
-            }
-        }
-    }
-}
-stage('Docker Build') {
-    steps {
-        sh '''
-          docker build -t linux-git-training:ci .
-        '''
-    }
-}
-pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                echo 'Code already checked out by Jenkins'
-            }
-        }
-
         stage('Verify Files') {
             steps {
+                sh 'ls -la'
+            }
+        }
+
+        stage('Check README') {
+            steps {
                 sh '''
-                  echo "Checking README standardization..."
                   if [ -f readme.md ]; then
-                    echo "ERROR: readme.md should not exist"
+                    echo "ERROR: readme.md exists"
                     exit 1
                   fi
-                  echo "README naming is clean"
-                '''
-            }
-        }
-
-        stage('Git History') {
-            steps {
-                sh '''
-                  echo "Recent commits:"
-                  git log --oneline -3
-                '''
-            }
-        }
-
-        stage('Docker Build') {
-            steps {
-                sh '''
-                  docker build -t linux-git-training:ci .
+                  echo "README naming OK"
                 '''
             }
         }
