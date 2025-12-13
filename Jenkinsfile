@@ -32,3 +32,10 @@ stage('Verify Files') {
         }
     }
 }
+stage('Docker Build') {
+    steps {
+        sh '''
+          docker build -t linux-git-training:ci .
+        '''
+    }
+}
