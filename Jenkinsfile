@@ -8,14 +8,19 @@ pipeline {
             }
         }
 
-        stage('Verify Files') {
-            steps {
-                sh '''
-                  echo "Listing repository files:"
-                  ls -la
-                '''
-            }
-        }
+stage('Verify Files') {
+    steps {
+        sh '''
+          echo "Checking README standardization..."
+          if [ -f readme.md ] && [ -f README.md ]; then
+            echo "ERROR: Both readme.md and README.md exist"
+            exit 1
+          fi
+          echo "README naming is clean"
+        '''
+    }
+}
+
 
         stage('Git History') {
             steps {
