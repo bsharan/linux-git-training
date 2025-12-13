@@ -1,3 +1,6 @@
-# Main Branch README
+# Project README
 
-This README is created on main branch.
+This README combines changes from:
+- Main branch
+- Feature conflict-demo branch
+
